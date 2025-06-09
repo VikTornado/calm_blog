@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'news',
     'users',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
