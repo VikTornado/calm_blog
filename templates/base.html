@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Calm Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll("a[href^='#']").forEach(anchor => {
+        anchor.addEventListener("click", function(e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth"
+          });
+        });
+      });
+    });
+  </script>
+</head>
+<body class="bg-white text-gray-900 font-sans">
+
+  <!-- Header -->
+  <header class="fixed w-full top-0 bg-white shadow z-50">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-bold">Calm</a>
+      <nav class="space-x-6">
+        <a href="#about" class="hover:text-blue-600">Про нас</a>
+        <a href="#news" class="hover:text-blue-600">Новини</a>
+        <a href="#contact" class="hover:text-blue-600">Контакти</a>
+        <a href="/accounts/login/" class="text-sm bg-blue-500 text-white px-3 py-1 rounded">Увійти</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="pt-24">
+    <!-- Hero -->
+    <section class="text-center py-20 bg-blue-100">
+      <h1 class="text-4xl font-bold mb-4">Ласкаво просимо до Calm Blog</h1>
+      <p class="text-lg text-gray-700">Ділимося добром, історіями та новинами благодійності</p>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 px-4 bg-white">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-2xl font-semibold mb-4">Про нас</h2>
+        <p class="text-gray-700">Ми благодійний фонд, що прагне змінити світ через добрі справи, підтримку та натхнення.</p>
+      </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="py-16 px-4 bg-gray-100">
+      <div class="container mx-auto">
+        <h2 class="text-2xl font-semibold mb-6 text-center">Останні новини</h2>
+        {% block content %}{% endblock %}
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 px-4 bg-white">
+      <div class="max-w-xl mx-auto text-center">
+        <h2 class="text-2xl font-semibold mb-4">Контакти</h2>
+        <p class="text-gray-700">Зв'яжіться з нами через електронну пошту або соціальні мережі. Разом ми сильніші!</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white text-center py-4">
+    <p>© 2025 Calm Blog. Усі права захищені.</p>
+  </footer>
+
+</body>
+</html>
