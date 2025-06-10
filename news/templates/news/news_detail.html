@@ -1,1 +1,21 @@
-<!-- ksdjghsdkjghsdkjvs -->
+{% extends "base.html" %}
+{% load static %}  {# додай цей рядок на початку, якщо використовуєш {% static %} у шаблоні #}
+
+{% block content %}
+  <div class="max-w-3xl mx-auto bg-white p-6 rounded shadow">
+    <h1 class="text-3xl font-bold mb-4">{{ news.title }}</h1>
+    
+    {% if news.image %}
+      <img src="{{ news.image.url }}" alt="{{ news.title }}" class="w-full h-64 object-cover mb-4 rounded">
+    {% endif %}
+    
+    <p class="text-sm text-gray-500 mb-2">
+      Автор: <a href="/users/{{ news.author.username }}/" class="text-blue-600 hover:underline">{{ news.author.username }}</a> • 
+      {{ news.created_at|date:"d M Y" }}
+    </p>
+    
+    <div class="prose max-w-none">
+      {{ news.content|safe }}
+    </div>
+  </div>
+{% endblock %}
