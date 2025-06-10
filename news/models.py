@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from slugify import slugify  # встанови: pip install python-slugify
+from ckeditor.fields import RichTextField
 
 class News(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True)
-    content = models.TextField()
+    content = RichTextField()
     image = models.ImageField(upload_to='news_images/', blank=True, null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
