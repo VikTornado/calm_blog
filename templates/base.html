@@ -26,8 +26,8 @@
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
       <a href="/" class="text-2xl font-bold">Peer-to-peer</a>
 <nav class="space-x-6 flex items-center">
+    <a href="{% url 'news_list_alt' %}" class="hover:text-blue-600">Новини</a>
   <a href="#about" class="hover:text-blue-600">Про нас</a>
-  <a href="{% url 'news_list_alt' %}" class="hover:text-blue-600">Новини</a>
   <a href="#contact" class="hover:text-blue-600">Контакти</a>
   {% if user.is_authenticated %}
     <span class="text-gray-700 font-medium">{{ user.username }}</span>
@@ -56,19 +56,19 @@
       <p class="text-lg text-gray-700">Ділимося добром, історіями та новинами благодійності</p>
     </section>
 
+        <!-- News Section -->
+    <section id="news" class="py-16 px-4 bg-gray-100">
+      <div class="container mx-auto">
+        <h2 class="text-2xl font-semibold mb-6 text-center">Останні новини</h2>
+        {% block content %}{% endblock %}
+      </div>
+    </section>
+
     <!-- About Section -->
     <section id="about" class="py-16 px-4 bg-white">
       <div class="max-w-3xl mx-auto text-center">
         <h2 class="text-2xl font-semibold mb-4">Про нас</h2>
         <p class="text-gray-700">Ми благодійний фонд, що прагне змінити світ через добрі справи, підтримку та натхнення.</p>
-      </div>
-    </section>
-
-    <!-- News Section -->
-    <section id="news" class="py-16 px-4 bg-gray-100">
-      <div class="container mx-auto">
-        <h2 class="text-2xl font-semibold mb-6 text-center">Останні новини</h2>
-        {% block content %}{% endblock %}
       </div>
     </section>
 
