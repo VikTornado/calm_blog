@@ -24,15 +24,30 @@
   <!-- Header -->
   <header class="fixed w-full top-0 bg-white shadow z-50">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-      <a href="/" class="text-2xl font-bold">Calm</a>
-      <nav class="space-x-6">
-        <a href="#about" class="hover:text-blue-600">Про нас</a>
-        <a href="#news" class="hover:text-blue-600">Новини</a>
-        <a href="#contact" class="hover:text-blue-600">Контакти</a>
-        <a href="/accounts/login/" class="text-sm bg-blue-500 text-white px-3 py-1 rounded">Увійти</a>
-      </nav>
+      <a href="/" class="text-2xl font-bold">Peer-to-peer</a>
+<nav class="space-x-6 flex items-center">
+  <a href="#about" class="hover:text-blue-600">Про нас</a>
+  <a href="{% url 'news_list_alt' %}" class="hover:text-blue-600">Новини</a>
+  <a href="#contact" class="hover:text-blue-600">Контакти</a>
+  {% if user.is_authenticated %}
+    <span class="text-gray-700 font-medium">{{ user.username }}</span>
+    <a href="{% url 'logout' %}" class="text-sm bg-red-500 text-white px-3 py-1 rounded">Вийти</a>
+  {% else %}
+    <a href="{% url 'login' %}" class="text-sm bg-blue-500 text-white px-3 py-1 rounded">Увійти</a>
+  {% endif %}
+</nav>
     </div>
   </header>
+
+  {% if messages %}
+    <div class="max-w-xl mx-auto mt-6 space-y-2">
+      {% for message in messages %}
+        <div class="p-4 rounded text-white {% if message.tags == 'success' %}bg-green-500{% elif message.tags == 'error' %}bg-red-500{% else %}bg-blue-500{% endif %}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
 
   <main class="pt-24">
     <!-- Hero -->

@@ -1,25 +1,38 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-    {% for news in news_list %}
-      <a href="{% url 'news_detail' slug=news.slug %}" class="block hover:shadow-lg transition">
-        <div class="bg-white rounded shadow-md overflow-hidden">
-          {% if news.image %}
-            <img src="{{ news.image.url }}" alt="{{ news.title }}" class="w-full h-48 object-cover">
-          {% endif %}
-          <div class="p-4">
-            <h3 class="text-xl font-semibold mb-2">{{ news.title }}</h3>
-            <p class="text-sm text-gray-500 mb-1">
-              Автор: <span class="text-blue-600 hover:underline">{{ news.author.username }}</span>
-            </p>
-            <p class="text-gray-600 text-sm mb-2">{{ news.created_at|date:"d M Y" }}</p>
-            <p class="text-gray-700">{{ news.content|truncatechars:150 }}</p>
-          </div>
-        </div>
-      </a>
-    {% empty %}
-      <p class="text-gray-600">Новин ще немає.</p>
-    {% endfor %}
+  <div class="container mx-auto px-4 pt-10">
+    <div class="flex justify-between items-center mb-6">
+      <!-- <h1 class="text-2xl font-bold">Останні новини</h1> -->
+      {% if user.is_authenticated %}
+        <a href="{% url 'news_create' %}" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+          Додати новину
+        </a>
+      {% endif %}
+    </div>
+    <section class="px-4">
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {% for news in news_list %}
+          <a href="{% url 'news_detail' slug=news.slug %}" class="block h-full hover:shadow-lg transition">
+            <div class="bg-white rounded shadow-md overflow-hidden flex flex-col h-full">
+              {% if news.image %}
+                <img src="{{ news.image.url }}" alt="{{ news.title }}" class="w-full h-48 object-cover">
+              {% endif %}
+              <div class="p-4 flex flex-col flex-grow">
+                <h3 class="text-xl font-semibold mb-2">{{ news.title }}</h3>
+                <p class="text-sm text-gray-500 mb-1">
+                  Автор: <span class="text-blue-600 hover:underline">{{ news.author.username }}</span>
+                </p>
+                <p class="text-gray-600 text-sm mb-2">{{ news.created_at|date:"d M Y" }}</p>
+                <p class="text-gray-700 flex-grow">{{ news.content|truncatechars:150 }}</p>
+              </div>
+            </div>
+          </a>
+        {% empty %}
+          <p class="text-gray-600">Новин ще немає.</p>
+        {% endfor %}
+      </div>
+    </section>
   </div>
 {% endblock %}
